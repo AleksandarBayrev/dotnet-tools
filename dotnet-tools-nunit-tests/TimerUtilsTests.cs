@@ -12,7 +12,8 @@ namespace dotnet.tools.nunit.tests
         {
             var data = "NotSet";
             Assert.AreEqual("NotSet", data);
-            await TimerUtils.SetTimeout(() => data = "test", TimeSpan.FromMilliseconds(1000));
+            TimerUtils.SetTimeout(() => data = "test", TimeSpan.FromMilliseconds(1000));
+            await Task.Delay(1000);
             Assert.AreEqual("test", data);
         }
         [TestMethod]
@@ -21,7 +22,7 @@ namespace dotnet.tools.nunit.tests
             var count = 0;
             Assert.AreEqual(0, count);
             TimerUtils.SetInterval(() => count++, TimeSpan.FromMilliseconds(1000));
-            await Task.Delay(1001);
+            await Task.Delay(1000);
             Assert.AreEqual(1, count);
         }
     }
